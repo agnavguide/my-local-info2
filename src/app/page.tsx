@@ -46,7 +46,7 @@ export default function Home() {
               <div key={item.id} className="group bg-white rounded-3xl p-7 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] border border-slate-100 transition-all duration-300 flex flex-col h-full">
                  <div className="flex justify-between items-center mb-4">
                    <span className="text-xs font-black text-blue-700 bg-blue-50 px-3 py-1 rounded-full">{item.category}</span>
-                   <Link href={item.link} className="text-xs font-bold text-slate-400 hover:text-blue-700 transition-colors">자세히 보기 &rarr;</Link>
+                   <Link href="/blog" className="text-xs font-bold text-slate-400 hover:text-blue-700 transition-colors">자세히 보기 &rarr;</Link>
                  </div>
                  
                  <h3 className="text-2xl font-black mb-4 leading-snug group-hover:text-blue-700 transition-colors">{item.title}</h3>
@@ -70,7 +70,7 @@ export default function Home() {
                     <p className="text-slate-700 font-bold leading-relaxed">{item.summary}</p>
                  </div>
                  
-                 <Link href={item.link} className="block w-full text-center bg-slate-900 text-white font-bold py-4 rounded-2xl hover:bg-blue-700 transition-colors shadow-md">
+                 <Link href="/blog" className="block w-full text-center bg-slate-900 text-white font-bold py-4 rounded-2xl hover:bg-blue-700 transition-colors shadow-md">
                    관련 정보 확인
                  </Link>
               </div>
@@ -123,7 +123,7 @@ export default function Home() {
                     </p>
                  </div>
                  
-                 <Link href={item.link} className="block w-full text-center bg-indigo-50 text-indigo-700 border-2 border-indigo-100 font-black py-4 rounded-2xl hover:bg-indigo-600 hover:text-white hover:border-indigo-600 transition-all text-lg shadow-sm">
+                 <Link href="/blog" className="block w-full text-center bg-indigo-50 text-indigo-700 border-2 border-indigo-100 font-black py-4 rounded-2xl hover:bg-indigo-600 hover:text-white hover:border-indigo-600 transition-all text-lg shadow-sm">
                    상세 조건 알아보기
                  </Link>
               </div>
