@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import localData from '../../public/data/local-info.json';
+import AdBanner from '@/components/AdBanner';
 
 export default function Home() {
   const { events, benefits } = localData;
@@ -109,7 +110,9 @@ export default function Home() {
           </div>
         </section>
 
-        <div className="w-full h-px bg-slate-200"></div>
+        <div className="w-full h-px bg-slate-200 my-12"></div>
+        
+        <AdBanner />
 
         {/* 3. 지원금/혜택 정보 */}
         <section>

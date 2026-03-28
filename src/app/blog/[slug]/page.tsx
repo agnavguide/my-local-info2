@@ -2,6 +2,7 @@ import { getPostData, getSortedPostsData } from '@/lib/posts';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import type { Metadata } from 'next';
+import AdBanner from '@/components/AdBanner';
 
 const BASE_URL = 'https://my-local-info2.pages.dev';
 
@@ -127,6 +128,8 @@ export default async function BlogPost(
           <p>정확한 내용은 원문 링크를 통해 확인해주세요.</p>
         )}
       </div>
+
+      <AdBanner />
     </article>
     </>
   );
