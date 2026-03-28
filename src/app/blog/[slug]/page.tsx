@@ -3,6 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import type { Metadata } from 'next';
 import AdBanner from '@/components/AdBanner';
+import CoupangBanner from '@/components/CoupangBanner';
 
 const BASE_URL = 'https://my-local-info2.pages.dev';
 
@@ -130,6 +131,7 @@ export default async function BlogPost(
       </div>
 
       <AdBanner />
+      <CoupangBanner />
     </article>
     </>
   );
