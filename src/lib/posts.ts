@@ -11,6 +11,7 @@ export interface PostData {
   summary: string;
   category: string;
   tags: string[];
+  link?: string;
   content: string;
 }
 
@@ -28,7 +29,7 @@ export function getSortedPostsData(): PostData[] {
       const fileContents = fs.readFileSync(fullPath, 'utf8');
 
       const matterResult = matter(fileContents);
-      const { title = '', date, summary = '', category = '', tags = [] } = matterResult.data;
+      const { title = '', date, summary = '', category = '', tags = [], link = '' } = matterResult.data;
 
       // date 파싱 후 포맷 변환 (Date 객체인 경우 YYYY-MM-DD)
       let formattedDate = date || '';
@@ -54,6 +55,7 @@ export function getSortedPostsData(): PostData[] {
         summary,
         category,
         tags,
+        link,
         content: matterResult.content,
       };
     });
@@ -73,7 +75,7 @@ export function getPostData(slug: string): PostData | null {
 
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const matterResult = matter(fileContents);
-  const { title = '', date, summary = '', category = '', tags = [] } = matterResult.data;
+  const { title = '', date, summary = '', category = '', tags = [], link = '' } = matterResult.data;
 
   let formattedDate = date || '';
   if (date instanceof Date) {
@@ -98,6 +100,7 @@ export function getPostData(slug: string): PostData | null {
     summary,
     category,
     tags,
+    link,
     content: matterResult.content,
   };
 }

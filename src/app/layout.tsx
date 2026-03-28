@@ -45,6 +45,7 @@ export default function RootLayout({
           <div className="max-w-5xl mx-auto flex justify-between items-center">
              <Link href="/" className="font-bold text-lg tracking-wider hover:text-blue-300 transition-colors">Local Info</Link>
              <div className="flex gap-6">
+                <Link href="/about" className="text-slate-300 hover:text-white font-bold transition-colors">소개</Link>
                 <Link href="/blog" className="text-slate-300 hover:text-white font-bold transition-colors">블로그</Link>
              </div>
           </div>

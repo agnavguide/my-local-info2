@@ -57,12 +57,21 @@ export default async function BlogPost(
     <article className="max-w-3xl mx-auto py-12 px-4 sm:px-6 lg:px-8 prose prose-blue lg:prose-lg">
       <h1 className="text-4xl font-extrabold mb-4">{postData.title}</h1>
       <div className="text-gray-500 mb-8 flex space-x-4 border-b border-gray-200 pb-4 text-sm">
-        <time>{postData.date}</time>
+        <time>최종 업데이트: {postData.date}</time>
         {postData.category && <span>• {postData.category}</span>}
       </div>
       <ReactMarkdown remarkPlugins={[remarkGfm]}>
         {postData.content}
       </ReactMarkdown>
+      
+      <div className="mt-12 p-6 bg-slate-50 rounded-lg text-sm text-slate-600 border border-slate-200">
+        <p className="mb-2">⚠️ 이 글은 공공데이터포털(<a href="https://www.data.go.kr/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">data.go.kr</a>)의 정보를 바탕으로 AI가 작성하였습니다.</p>
+        {postData.link ? (
+          <p>정확한 내용은 <a href={postData.link} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline font-medium">원문 링크</a>를 통해 확인해주세요.</p>
+        ) : (
+          <p>정확한 내용은 원문 링크를 통해 확인해주세요.</p>
+        )}
+      </div>
     </article>
   );
 }

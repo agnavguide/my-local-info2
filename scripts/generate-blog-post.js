@@ -65,6 +65,7 @@ date: (오늘 날짜 YYYY-MM-DD)
 summary: (한 줄 요약)
 category: 정보
 tags: ['태그1', '태그2', '태그3']
+link: '${latestItem.link || ""}'
 ---
 
 (주의: 양식의 tags 배열 내부 항목은 반드시 따옴표('')로 감싸주세요. 예: ['#청년', '#지원'])
