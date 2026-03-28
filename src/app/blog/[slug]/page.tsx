@@ -1,6 +1,32 @@
 import { getPostData, getSortedPostsData } from '@/lib/posts';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import type { Metadata } from 'next';
+
+const BASE_URL = 'https://my-local-info2.pages.dev';
+
+export async function generateMetadata(
+  props: { params: Promise<{ slug: string }> }
+): Promise<Metadata> {
+  const { slug } = await props.params;
+  const postData = getPostData(slug);
+
+  if (!postData) {
+    return { title: '글을 찾을 수 없습니다' };
+  }
+
+  return {
+    title: `${postData.title} | 성남시 생활 정보`,
+    description: postData.summary || postData.title,
+    openGraph: {
+      title: postData.title,
+      description: postData.summary || postData.title,
+      url: `${BASE_URL}/blog/${slug}/`,
+      type: 'article',
+      publishedTime: postData.date,
+    },
+  };
+}
 
 export async function generateStaticParams() {
   const posts = getSortedPostsData();
@@ -8,6 +34,7 @@ export async function generateStaticParams() {
     slug: post.slug,
   }));
 }
+
 
 export default async function BlogPost(
   props: {
