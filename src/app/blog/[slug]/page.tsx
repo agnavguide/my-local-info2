@@ -54,8 +54,63 @@ export default async function BlogPost(
   }
 
   return (
-    <article className="max-w-3xl mx-auto py-12 px-4 sm:px-6 lg:px-8 prose prose-blue lg:prose-lg">
-      <h1 className="text-4xl font-extrabold mb-4">{postData.title}</h1>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "headline": postData.title,
+            "datePublished": postData.date,
+            "description": postData.summary || postData.title,
+            "author": {
+              "@type": "Organization",
+              "name": "성남시 생활 정보",
+              "url": BASE_URL
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "성남시 생활 정보",
+              "logo": {
+                "@type": "ImageObject",
+                "url": `${BASE_URL}/favicon.ico`
+              }
+            }
+          })
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "홈",
+                "item": BASE_URL
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "블로그",
+                "item": `${BASE_URL}/blog/`
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": postData.title,
+                "item": `${BASE_URL}/blog/${slug}/`
+              }
+            ]
+          })
+        }}
+      />
+      <article className="max-w-3xl mx-auto py-12 px-4 sm:px-6 lg:px-8 prose prose-blue lg:prose-lg">
+        <h1 className="text-4xl font-extrabold mb-4">{postData.title}</h1>
       <div className="text-gray-500 mb-8 flex space-x-4 border-b border-gray-200 pb-4 text-sm">
         <time>최종 업데이트: {postData.date}</time>
         {postData.category && <span>• {postData.category}</span>}
@@ -73,5 +128,6 @@ export default async function BlogPost(
         )}
       </div>
     </article>
+    </>
   );
 }

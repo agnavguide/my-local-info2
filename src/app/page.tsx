@@ -9,8 +9,39 @@ export default function Home() {
   const today = new Date();
   const formattedDate = `${today.getFullYear()}년 ${today.getMonth() + 1}월 ${today.getDate()}일`;
 
+  const eventSchemas = events.map(item => ({
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": item.title,
+    "startDate": item.startDate,
+    "endDate": item.endDate !== '상시' ? item.endDate : item.startDate,
+    "location": {
+      "@type": "Place",
+      "name": item.location,
+      "address": item.location
+    },
+    "description": item.summary
+  }));
+
+  const serviceSchemas = benefits.map(item => ({
+    "@context": "https://schema.org",
+    "@type": "GovernmentService",
+    "name": item.title,
+    "description": item.summary,
+    "provider": {
+      "@type": "GovernmentOrganization",
+      "name": item.location
+    }
+  }));
+
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-blue-300">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([...eventSchemas, ...serviceSchemas])
+        }}
+      />
       {/* 1. 상단 헤더 */}
       <header className="bg-blue-900 text-white py-12 px-6 shadow-xl border-b-8 border-blue-600">
         <div className="max-w-5xl mx-auto flex flex-col items-start gap-4">
