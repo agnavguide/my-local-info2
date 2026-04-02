@@ -53,6 +53,8 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          NEXT_PUBLIC_GA_ID: ${{ secrets.NEXT_PUBLIC_GA_ID }}
 
       - name: Deploy to Cloudflare Pages
         run: npx wrangler pages deploy out --project-name=my-local-info2
