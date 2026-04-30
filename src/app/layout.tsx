@@ -29,6 +29,7 @@ export const metadata: Metadata = {
 };
 
 import Link from 'next/link';
+import Chatbot from '../components/Chatbot';
 
 export default function RootLayout({
   children,
@@ -96,6 +97,7 @@ export default function RootLayout({
         <div className="flex-1 flex flex-col">
           {children}
         </div>
+        <Chatbot />
       </body>
     </html>
   );
