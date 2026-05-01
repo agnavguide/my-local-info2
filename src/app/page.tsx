@@ -10,19 +10,57 @@ export default function Home() {
   const today = new Date();
   const formattedDate = `${today.getFullYear()}년 ${today.getMonth() + 1}월 ${today.getDate()}일`;
 
-  const eventSchemas = events.map(item => ({
-    "@context": "https://schema.org",
-    "@type": "Event",
-    "name": item.title,
-    "startDate": item.startDate,
-    "endDate": item.endDate !== '상시' ? item.endDate : item.startDate,
-    "location": {
-      "@type": "Place",
-      "name": item.location,
-      "address": item.location
-    },
-    "description": item.summary
-  }));
+  const currentYear = today.getFullYear();
+  const parseToISO = (dateStr: string, fallbackMonth?: number) => {
+    if (!dateStr || dateStr === '상시') return null;
+    const mMatch = dateStr.match(/(\d+)월/);
+    const dMatch = dateStr.match(/(\d+)일/);
+    const month = mMatch ? parseInt(mMatch[1], 10) : (fallbackMonth || 1);
+    const day = dMatch ? parseInt(dMatch[1], 10) : 1;
+    return `${currentYear}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}T09:00:00+09:00`;
+  };
+
+  const eventSchemas = events.map(item => {
+    const mMatch = item.startDate.match(/(\d+)월/);
+    const fallbackMonth = mMatch ? parseInt(mMatch[1], 10) : undefined;
+    const startIso = parseToISO(item.startDate) || `${currentYear}-01-01T09:00:00+09:00`;
+    const endIso = parseToISO(item.endDate, fallbackMonth) || startIso;
+
+    return {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      "name": item.title,
+      "startDate": startIso,
+      "endDate": endIso,
+      "eventStatus": "https://schema.org/EventScheduled",
+      "image": [
+        "https://agnavguide.com/default-event.jpg"
+      ],
+      "description": item.summary,
+      "offers": {
+        "@type": "Offer",
+        "url": `https://agnavguide.com${item.link}`,
+        "price": "0",
+        "priceCurrency": "KRW",
+        "availability": "https://schema.org/InStock"
+      },
+      "performer": {
+        "@type": "Organization",
+        "name": "성남시"
+      },
+      "location": {
+        "@type": "Place",
+        "name": item.location,
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": item.location,
+          "addressLocality": "성남시",
+          "addressRegion": "경기도",
+          "addressCountry": "KR"
+        }
+      }
+    };
+  });
 
   const serviceSchemas = benefits.map(item => ({
     "@context": "https://schema.org",

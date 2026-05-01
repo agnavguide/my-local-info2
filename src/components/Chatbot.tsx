@@ -13,7 +13,7 @@ export default function Chatbot() {
   // 💡 챗봇 색상과 이름을 변경하려면 아래 값을 수정하세요.
   const THEME_COLOR = "bg-blue-500"; // (원하는 색상) 예: bg-green-500, bg-indigo-500 등
   const HOVER_COLOR = "hover:bg-blue-600"; // 마우스를 올렸을 때 색상, 예: hover:bg-green-600
-  const BOT_NAME = "(원하는 이름)";
+  const BOT_NAME = "챗봇";
 
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
