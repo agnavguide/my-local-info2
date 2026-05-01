@@ -80,7 +80,7 @@ export default function Chatbot() {
       {/* 플로팅 챗봇 버튼 */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`fixed bottom-5 right-5 sm:bottom-6 sm:right-6 w-14 h-14 ${THEME_COLOR} ${HOVER_COLOR} text-white rounded-full items-center justify-center shadow-lg transition-transform hover:scale-105 z-[9999] ${isOpen ? 'hidden sm:flex' : 'flex'}`}
+        className={`fixed bottom-6 right-6 w-14 h-14 ${THEME_COLOR} ${HOVER_COLOR} text-white rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-105 z-50`}
         aria-label="채팅 상담 열기"
       >
         {isOpen ? (
