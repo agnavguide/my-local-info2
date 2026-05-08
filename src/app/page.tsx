@@ -42,7 +42,8 @@ export default function Home() {
         "url": `https://agnavguide.com${item.link}`,
         "price": "0",
         "priceCurrency": "KRW",
-        "availability": "https://schema.org/InStock"
+        "availability": "https://schema.org/InStock",
+        "validFrom": startIso
       },
       "performer": {
         "@type": "Organization",
